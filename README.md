@@ -3,7 +3,7 @@
 
 ### Overview
 
-**TechIA-Salary-Manager** is a Python-based application that processes employee data from a JSON file, calculates monthly salaries, and generates a detailed report for each branch (filiale). The script also adds a new `monthly_salary` key to each employee's data, storing the result in an updated JSON file.
+**TechIA-Salary-Manager** is a Python-based program that processes employee data from a JSON file, calculates monthly salaries, and generates a detailed report for each branch (filiale).
 
 ### Features
 
@@ -11,7 +11,7 @@
 - Calculates monthly salaries, considering contract hours and overtime.
 - Outputs detailed salary reports for each branch.
 - Computes and displays salary statistics (average, highest, lowest) per branch and globally.
-- Adds calculated monthly salaries to the original data and saves them in an updated JSON file.
+
 
 ### Functions
 
