@@ -7,9 +7,7 @@ def extract_data():
     and calculates monthly salary for each employee.
 
     Returns:
-        dict: Dictionary where each key is a filial, containing lists of employee 
-              names, job titles, hourly rates, weekly hours, contract hours, 
-              and monthly salaries.
+        filial_data(dict): Dictionary where each key is a filial, containing lists of employee data.
     """
     with open("employes_data.json", 'r') as file:
         employes_data = json.load(file)
@@ -52,9 +50,10 @@ def calcul_single_monthly_rate(hourly_rate, weekly_hours_worked, contract_hours)
     """
     Calculates the monthly salary for an employee based on their hourly rate,
     weekly hours worked, and contract hours.
-
+    Args:
+        Hourly_rate(list), weekly_hours_worked(list), and contract_hours(list).
     Returns:
-        float: Monthly salary.
+        salary(float): Monthly salary.
     """
     if weekly_hours_worked > contract_hours:
         overtime_hours = weekly_hours_worked - contract_hours
@@ -71,7 +70,8 @@ def calcul_single_monthly_rate(hourly_rate, weekly_hours_worked, contract_hours)
 def calcul_stats(salary_list):
     """
     Calculates the mean, max, and min salary from a list of salaries.
-
+    Args : 
+        salary_list(list): List of salaries.
     Returns:
         tuple: (mean_salary, max_salary, min_salary)
     """
@@ -82,11 +82,14 @@ def calcul_stats(salary_list):
     return mean_salary, max_salary, min_salary
 
 
-filial_data = extract_data()
-
-global_salary_list = []
-
-def print_report(filial_data, global_salary_list):
+def print_report():
+    """ 
+    Prints employee salary data and statistics for each filial and globally.
+    """
+    
+    filial_data = extract_data()
+    global_salary_list = []
+    
     for filial, data in filial_data.items():
         mean_salary, max_salary, min_salary = calcul_stats(data["monthly_salary_list"])
 
@@ -112,4 +115,4 @@ def print_report(filial_data, global_salary_list):
     print(f'Global lowest salary: {global_min_salary:.2f} $')
     print("=" * 80)
 
-print_report(filial_data, global_salary_list)
+    print_report(filial_data, global_salary_list)
