@@ -1,4 +1,5 @@
 import json
+import csv
 
 
 def extract_data():
@@ -81,14 +82,13 @@ def calcul_stats(salary_list):
 
     return mean_salary, max_salary, min_salary
 
+filial_data = extract_data()
+global_salary_list = []
 
-def print_report():
+def print_report(filial_data, global_salary_list):
     """ 
     Prints employee salary data and statistics for each filial and globally.
     """
-    
-    filial_data = extract_data()
-    global_salary_list = []
     
     for filial, data in filial_data.items():
         mean_salary, max_salary, min_salary = calcul_stats(data["monthly_salary_list"])
@@ -115,4 +115,4 @@ def print_report():
     print(f'Global lowest salary: {global_min_salary:.2f} $')
     print("=" * 80)
 
-    print_report(filial_data, global_salary_list)
+print_report(filial_data, global_salary_list)
