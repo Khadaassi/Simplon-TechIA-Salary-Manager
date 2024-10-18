@@ -21,8 +21,8 @@
 
 ### Report Preview
 
-![Employee Salary System Flow](images/report_filial_Techcorp.png)
+![Employee Salary Report](images/report_filial_Techcorp.png)
 
-![Employee Salary System Flow](images/report_filial_DesignWork.png)
+![Employee Salary Report](images/report_filial_DesignWork.png)
 
-![Employee Salary System Flow](images/report_filial_Projectlead_and_stat_global.png)
+![Employee Salary Report](images/report_filial_Projectlead_and_stat_global.png)
