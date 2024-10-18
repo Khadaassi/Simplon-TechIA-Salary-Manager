@@ -1,12 +1,13 @@
 import json
 
+
 def extract_data():
-    """ 
-    Extracts employee data from a JSON file, organizes it by branch (filiale),
+    """
+    Extracts employee data from a JSON file, organizes it by filial,
     and calculates monthly salary for each employee.
 
     Returns:
-        dict: Dictionary where each key is a branch, containing lists of employee 
+        dict: Dictionary where each key is a filial, containing lists of employee 
               names, job titles, hourly rates, weekly hours, contract hours, 
               and monthly salaries.
     """
@@ -46,6 +47,7 @@ def extract_data():
 
     return filial_data
 
+
 def calcul_single_monthly_rate(hourly_rate, weekly_hours_worked, contract_hours):
     """
     Calculates the monthly salary for an employee based on their hourly rate,
@@ -65,6 +67,7 @@ def calcul_single_monthly_rate(hourly_rate, weekly_hours_worked, contract_hours)
     
     return salary
 
+
 def calcul_stats(salary_list):
     """
     Calculates the mean, max, and min salary from a list of salaries.
@@ -78,32 +81,35 @@ def calcul_stats(salary_list):
 
     return mean_salary, max_salary, min_salary
 
+
 filial_data = extract_data()
 
 global_salary_list = []
 
-for filial, data in filial_data.items():
-    mean_salary, max_salary, min_salary = calcul_stats(data["monthly_salary_list"])
+def print_report(filial_data, global_salary_list):
+    for filial, data in filial_data.items():
+        mean_salary, max_salary, min_salary = calcul_stats(data["monthly_salary_list"])
 
-    print(f"Branch: {filial}")
+        print(f"Filial: {filial}")
+        print("=" * 80)
+        for i in range(len(data["name_list"])):
+            print(f"{data['name_list'][i]:<20}| {data['job_list'][i]:<20}| Monthly Salary: {data['monthly_salary_list'][i]:.2f} $")
+        
+        print("-" * 80)
+        print(f"Salary statistics for filial {filial}")
+        print(f'Average salary: {mean_salary:.2f} $')
+        print(f'Highest salary: {max_salary:.2f} $')
+        print(f'Lowest salary: {min_salary:.2f} $', end="\n\n\n")
+        
+        global_salary_list.extend(data["monthly_salary_list"])
+
+    global_mean_salary, global_max_salary, global_min_salary = calcul_stats(global_salary_list)
+
     print("=" * 80)
-    for i in range(len(data["name_list"])):
-        print(f"{data['name_list'][i]:<20}| {data['job_list'][i]:<20}| Monthly Salary: {data['monthly_salary_list'][i]:.2f} $")
-    
-    print("-" * 80)
-    print(f"Salary statistics for branch {filial}")
-    print(f'Average salary: {mean_salary:.2f} $')
-    print(f'Highest salary: {max_salary:.2f} $')
-    print(f'Lowest salary: {min_salary:.2f} $', end="\n\n")
-    
-    global_salary_list.extend(data["monthly_salary_list"])
+    print("Global salary statistics for TechIA")
+    print(f'Global average salary: {global_mean_salary:.2f} $')
+    print(f'Global highest salary: {global_max_salary:.2f} $')
+    print(f'Global lowest salary: {global_min_salary:.2f} $')
+    print("=" * 80)
 
-global_mean_salary, global_max_salary, global_min_salary = calcul_stats(global_salary_list)
-
-print("=" * 80)
-print("Global salary statistics for TechIA")
-print(f'Global average salary: {global_mean_salary:.2f} $')
-print(f'Global highest salary: {global_max_salary:.2f} $')
-print(f'Global lowest salary: {global_min_salary:.2f} $')
-print("=" * 80)
-
+print_report(filial_data, global_salary_list)
